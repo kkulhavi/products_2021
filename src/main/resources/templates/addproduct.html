@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>add product</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+input {
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+#novi {
+    margin-bottom: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: xx-large;
+}
+p{
+    margin-bottom: 5px;
+    display: block;
+}
+form {
+    text-align: center;
+    padding: 20px 20px 30px 30px;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+</style>
+
+<body>
+<div class="container">
+    <form action="/addproduct" method="post">
+        <div id="novi">Novi Proizvod</div>
+        <p>Upišite ime proizvoda:</p>
+        <input  name="productName"></br>
+        <p>Upišite cijenu proizvoda(kn):</p>
+        <input  name="productPrice"></br>
+        <p> Upišite energetsku vrijednost proizvoda(kcal/100g):</p>
+        <input  name="productEnergy"></br>
+        <p>Upišite masnoću proizvoda(g/100g):</p>
+        <input  name="productFat"></br>
+        <p>Upišite količinu ugljikohidrata proizvoda(g/100g):</p>
+        <input  name="productCarbohydrates"></br>
+        <p>Upišite količinu proteina proizvoda(g/100g):</p>
+        <input  name="productProtein"></br>
+        <p>Upišite količinu soli proizvoda(g/100g):</p>
+        <input  name="productSalt"></br>
+        <p>Upišite količinu vlakana proizvoda(g/100g):</p>
+        <input  name="productFibers"></br>
+        <button class="btn btn-outline-secondary">Odustani</button>
+        <button class="btn btn-outline-success">spremi</button></br>
+    </form>
+</div>
+</body>
+</html>

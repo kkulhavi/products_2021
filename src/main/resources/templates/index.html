@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+    table{
+        border-style: solid;
+    }
+    td{
+        border: black;
+        text-align: center;
+    }
+    th{
+        border: black;
+        text-align: center;
+    }
+    tr .edit{
+        display: none;
+    }
+    tr.edit .noedit{
+        display: none;
+    }
+    tr.edit .edit{
+        display: initial;
+    }
+</style>
+</head>
+
+<body>
+<div class="container">
+    <table class="table table-hover">
+        <tr>
+            <th><a href="/sortproductasc" th:text="'Product'+${arrowPro}"></a></th>
+            <th><a href="/sortproductprice" th:text="'Price'+${arrowPri}"></a></th>
+            <th><a href="/sortproductenergy" th:text="'Energy'+${arrowEne}"></a></th>
+            <th><a href="/sortproductfat" th:text="'Fat'+${arrowFat}"></a></th>
+            <th><a href="/sortproductcarbohydrates" th:text="'Carbohydrates'+${arrowCar}"></a></th>
+            <th><a href="/sortproductprotein" th:text="'Protein'+${arrowProt}"></a></th>
+            <th><a href="/sortproductsalt" th:text="'Salt'+${arrowSal}"></a></th>
+            <th><a href="/sortproductfibers" th:text="'Fibers'+${arrowFib}"></a></th>
+            <th>Protein/Fat</th>
+            <th>Edit</th>
+        </tr>
+        <tr th:each="product:${products}">
+            <td class="noedit" th:text="${product.productName}"></td>
+            <td class="noedit" th:text="${product.productPrice}">kn</td>
+            <td class="noedit" th:text="${product.productEnergy}">g</td>
+            <td class="noedit" th:text="${product.productFat}">g</td>
+            <td class="noedit" th:text="${product.productCarbohydrates}">g</td>
+            <td class="noedit" th:text="${product.productProtein}">g</td>
+            <td class="noedit" th:text="${product.productSalt}">g</td>
+            <td class="noedit" th:text="${product.productFibers}">g</td>
+
+            <td class="noedit" th:utext="${(product.productProtein/product.productFat)>1?
+            '<span class=&quot;badge badge-success&quot;>healthy</span>':
+            '<span class=&quot;badge badge-warning&quot;>unhealthy</span>'}">
+            </td>
+            <td class="noedit"><button class="btn btn-outline-primary">edit</button></td>
+
+                        <!--forma koja ide na osnovni post koji će uzeti dane
+                        nove podatke i ubaciti ih u bazu umjesto starih-->
+
+            <form action="/" method="post">
+                <td class="edit">
+                    <input  hidden th:value="${product.id}" name="id">
+                    <input th:value="${product.productName}" name="productName">
+                </td>
+                <td class="edit">
+                    <input th:value="${product.productPrice}" name="productPrice">
+                </td>
+                <td  class="edit">
+                    <input th:value="${product.productEnergy}" name="productEnergy">
+                </td>
+                <td  class="edit">
+                    <input th:value="${product.productFat}" name="productFat">
+                </td>
+                <td  class="edit">
+                    <input th:value="${product.productCarbohydrates}" name="productCarbohydrates">
+                </td>
+                <td  class="edit">
+                    <input th:value="${product.productProtein}" name="productProtein">
+                </td>
+                <td class="edit">
+                    <input th:value="${product.productSalt}" name="productSalt">
+                </td>
+                <td class="edit">
+                    <input th:value="${product.productFibers}" name="productFibers">
+                </td>
+                <td  class="edit">
+                    <button class="btn btn-outline-secondary">cancel</button><!--button za odustajanje od promjene podataka-->
+                    <button class="btn btn-outline-success">save</button><!--button za spremanje promjenjenih podataka-->
+                </td>
+            </form>
+        </tr>
+        <!-- link na drugi html dokument za dodavanje proizvoda -->
+        <tr><td colspan="10"><a href="/toaddproductpage">add product</a></td></tr>
+    </table>
+</div>
+
+
+<script>
+    const table=document.querySelector('table');
+
+    table.addEventListener('click',(e)=>{
+        const tr=document.querySelectorAll('tr')
+        console.log(e.target)
+        if(e.target.innerHTML==='edit'){
+            tr.forEach(row=>row.classList.remove('edit'))
+            e.target.parentElement.parentElement.classList.add('edit')
+        }
+        if(e.target.innerHTML==='cancel'){
+            e.target.parentElement.parentElement.classList.remove('edit')
+        }
+        if(e.target.innerHTML==='save'){
+            e.target.parentElement.parentElement.classList.remove('edit')
+        }
+    })
+</script>
+
+</body>
+</html>
