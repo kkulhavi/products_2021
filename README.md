@@ -1,2 +1,2 @@
 # products_2021
-# this app is made for learning purpose
+# this application is made for learning purposes
